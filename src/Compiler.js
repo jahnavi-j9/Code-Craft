@@ -1,4 +1,3 @@
-// Compiler.jsx
 import React, { useState, useEffect, useCallback } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { autocompletion } from '@codemirror/autocomplete';
@@ -14,10 +13,11 @@ import './Compiler.css';
 
 const themes = {
   dark: oneDark,
-  light: githubLight
+  light: githubLight,
 };
 
-const JUDGE0_API_URL = 'https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true';
+const JUDGE0_API_URL =
+  'https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true';
 const RAPIDAPI_KEY = 'e388ef22dcmshfa57802d4286138p12978bjsn46afbcf86078';
 
 const Compiler = () => {
@@ -93,7 +93,8 @@ const Compiler = () => {
   }, []);
 
   const copyCode = useCallback(() => {
-    navigator.clipboard.writeText(code)
+    navigator.clipboard
+      .writeText(code)
       .then(() => setOutput('Code copied to clipboard!'))
       .catch(() => setError('Failed to copy code'));
   }, [code]);
@@ -131,30 +132,89 @@ const Compiler = () => {
   }, [runCode]);
 
   const createPreviewSrcDoc = () => {
+    const baseStyles = `
+      body {
+        margin: 0;
+        padding: 1rem;
+        font-family: 'Consolas', monospace;
+        font-size: 16px;
+        background-color: ${theme === 'dark' ? '#151515' : '#ffffff'};
+        color: ${theme === 'dark' ? '#ffffff' : '#000000'};
+      }
+      #output {
+        white-space: pre-wrap;
+        word-break: break-word;
+        padding: 1rem;
+        background-color: transparent;
+        border: none;
+      }
+    `;
+
     if (language === 'javascript') {
       return `
-        <html><body><pre id="output"></pre><script>
-          (function() {
-            const outputEl = document.getElementById('output');
-            console.log = function(...args) {
-              outputEl.textContent += args.join(' ') + '\n';
-            };
-            try {
-              ${code}
-            } catch(e) {
-              outputEl.textContent += 'Error: ' + e.message;
-            }
-          })();
-        </script></body></html>
-      `;
-    } else if (language === 'html') {
-      return code;
-    } else if (language === 'css') {
-      return `
-        <html><head><style>${code}</style></head>
-        <body><h1>CSS Preview</h1></body></html>
+        <html>
+          <head><style>${baseStyles}</style></head>
+          <body>
+            <pre id="output"></pre>
+            <script>
+              window.onload = function () {
+                const outputEl = document.getElementById('output');
+                const originalLog = console.log;
+                console.log = function (...args) {
+                  originalLog(...args);
+                  outputEl.textContent += args.join(' ') + '\\n';
+                };
+                try {
+                  ${code}
+                } catch (e) {
+                  outputEl.textContent += 'Error: ' + e.message;
+                }
+              };
+            </script>
+          </body>
+        </html>
       `;
     }
+
+    if (language === 'html') {
+      return `
+        <html>
+          <head>
+            <style>
+              body {
+                background-color: ${theme === 'dark' ? '#151515' : '#fff'};
+                color: ${theme === 'dark' ? '#fff' : '#000'};
+                margin: 0;
+                padding: 1rem;
+              }
+            </style>
+          </head>
+          <body>${code}</body>
+        </html>
+      `;
+    }
+
+    if (language === 'css') {
+      return `
+        <html>
+          <head>
+            <style>
+              body {
+                margin: 0;
+                padding: 2rem;
+                background: ${theme === 'dark' ? '#151515' : '#fff'};
+                color: ${theme === 'dark' ? '#fff' : '#000'};
+              }
+              ${code}
+            </style>
+          </head>
+          <body>
+            <h1>CSS Preview</h1>
+          </body>
+        </html>
+      `;
+    }
+
     return '';
   };
 
@@ -197,7 +257,7 @@ const Compiler = () => {
             <div className="error-message">{error}</div>
           ) : (
             <div className="output-box">
-              {(language === 'javascript' || language === 'html' || language === 'css') ? (
+              {['javascript', 'html', 'css'].includes(language) ? (
                 <iframe
                   title="preview"
                   sandbox="allow-scripts"
