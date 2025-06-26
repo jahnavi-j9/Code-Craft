@@ -1,70 +1,109 @@
-# Getting Started with Create React App
+# 🧠 CODE CRAFT - Online Code Compiler
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Code Craft** is a real-time online compiler supporting multiple programming languages with live preview, syntax highlighting, and code execution using Judge0 API.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Features
 
-### `npm start`
+- 💻 **Live Code Editor** using CodeMirror
+- 🌓 **Dark / Light Theme Toggle**
+- 🔧 Supports multiple languages:
+  - Python
+  - C++
+  - Java
+  - JavaScript (Live Preview)
+  - HTML (Live Preview)
+  - CSS (Live Preview)
+- ▶️ Run code via [Judge0 API](https://rapidapi.com/judge0-official/api/judge0-ce)
+- 📊 Analyze lines, characters, and version
+- 📋 Copy code to clipboard
+- 💾 Export code as a file
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## 🛠️ Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **React.js**
+- **CodeMirror** editor (`@uiw/react-codemirror`)
+- **Judge0 API** for code execution
+- **HTML**, **CSS**, **JavaScript**
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 📂 Project Structure
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+online-code-compiler/
+├── public/
+├── src/
+│   ├── components/
+│   │   └── Compiler.jsx
+│   ├── Compiler.css
+│   ├── languageConfig.js
+│   ├── languageSupport.js
+│   └── App.js
+├── package.json
+└── README.md
 
-### `npm run eject`
+````
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## ⚙️ Setup & Run
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. **Clone the repo:**
+```bash
+git clone https://github.com/your-username/online-code-compiler.git
+cd online-code-compiler
+````
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+2. **Install dependencies:**
 
-## Learn More
+```bash
+npm install
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. **Start the development server:**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm start
+```
 
-### Code Splitting
+> Make sure to add your **Judge0 API Key** in `Compiler.jsx` file:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```js
+const RAPIDAPI_KEY = 'your_api_key_here';
+```
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🔐 Judge0 API Setup
 
-### Making a Progressive Web App
+* Visit [Judge0 on RapidAPI](https://rapidapi.com/judge0-official/api/judge0-ce)
+* Subscribe and get your **X-RapidAPI-Key**
+* Replace `RAPIDAPI_KEY` in your code
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## 🙋‍♀️ Author
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+**Jahnavi Grandhi**
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## 📄 License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the **MIT License**.
+
+
+
+## ⭐ Star this repo
+
+If you like this project, show your support by ⭐ starring the repository!
+
+
+✅ You're ready to paste this directly into your `README.md` file. Let me know if you want the screenshots or deploy instructions too!
+
